@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "my-project-intel": {
+      "command": "python",
+      "args": ["code_intelligence.py", "--root", "/path/to/your/project"]
+    }
+  }
+}
