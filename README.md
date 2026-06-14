@@ -12,18 +12,30 @@ This server analyzes a Python project at startup, building an in-memory index th
 
 The indexed data powers 8 MCP tools that let an AI assistant navigate and query codebases semantically.
 
+## Quick Start (uvx)
+
+Run directly without installing:
+
+```powershell
+uvx code-intelligence-mcp --root D:\path\to\your\project
+```
+
+> **Note**: On Windows, use double backslashes or forward slashes for paths.
+
 ## Directory Structure
 
 ```
 code_intelligence_mcp/
 ├── main.py                 # Entry point - run this to start the server
 ├── mcp_client.py           # Test client that connects to the server
+├── pyproject.toml          # Package configuration
 ├── README.md               # This file
 ├── src/
 │   ├── __init__.py         # Package exports
+│   ├── __main__.py         # Package entry point (for python -m src)
 │   ├── types.py            # SymbolInfo, CodeIndex data classes
-│   ├── indexer.py         # AST parsing and codebase indexing
-│   ├── search.py          # BM25 search setup and search logic
+│   ├── indexer.py          # AST parsing and codebase indexing
+│   ├── search.py           # BM25 search setup and search logic
 │   └── tools.py            # MCP tool definitions (create_tools, handle_tool)
 └── code_intelligence.py    # Original monolithic file (kept for reference)
 ```
@@ -49,11 +61,24 @@ If you already have them installed, skip this step.
 
 ## Run the MCP Server
 
-Use `uv run python` to start the server with the correct environment:
+### Option 1: uvx (recommended for quick testing)
+
+```powershell
+uvx code-intelligence-mcp --root D:\path\to\your\project
+```
+
+### Option 2: Local development
 
 ```powershell
 cd code_intelligence_mcp
-uv run python main.py --root path-to-project
+uv run python main.py --root D:\path\to\your\project
+```
+
+### Option 3: python -m src
+
+```powershell
+cd code_intelligence_mcp
+uv run python -m src --root D:\path\to\your\project
 ```
 
 > **Note**: On Windows, pass the root path with normal backslashes and use `uv run python` instead of calling `uv` directly as the subprocess command.
@@ -154,6 +179,36 @@ if __name__ == "__main__":
 Run with:
 ```powershell
 uv run python mcp_client.py
+```
+
+## Publishing to PyPI
+
+### Prerequisites
+
+1. Create a PyPI account at https://pypi.org/
+2. Create an API token at https://pypi.org/manage/account/
+3. Set the token as an environment variable:
+   ```powershell
+   $env:UV_PUBLISH_TOKEN = "pypi-your-token-here"
+   ```
+
+### Build and Publish
+
+```powershell
+uv build
+uv publish
+```
+
+### Install from PyPI
+
+After publishing, users can install and run:
+
+```powershell
+# Install globally
+uv pip install code-intelligence-mcp
+
+# Or run directly with uvx (recommended)
+uvx code-intelligence-mcp --root D:\path\to\your\project
 ```
 
 ## Troubleshooting

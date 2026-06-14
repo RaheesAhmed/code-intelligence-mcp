@@ -1,7 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "code-intelligence-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "MCP server that indexes Python codebases and exposes intelligent tools for code exploration and search"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -9,3 +13,13 @@ dependencies = [
     "mcp>=1.27.2",
     "rank-bm25>=0.2.2",
 ]
+
+[project.scripts]
+code-intelligence-mcp = "main:main"
+
+[project.urls]
+Homepage = "https://github.com/RaheesAhmed/code-intelligence-mcp"
+Repository = "https://github.com/RaheesAhmed/code-intelligence-mcp"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
