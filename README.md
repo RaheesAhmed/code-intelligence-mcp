@@ -181,23 +181,6 @@ Run with:
 uv run python mcp_client.py
 ```
 
-## Publishing to PyPI
-
-### Prerequisites
-
-1. Create a PyPI account at https://pypi.org/
-2. Create an API token at https://pypi.org/manage/account/
-3. Set the token as an environment variable:
-   ```powershell
-   $env:UV_PUBLISH_TOKEN = "pypi-your-token-here"
-   ```
-
-### Build and Publish
-
-```powershell
-uv build
-uv publish
-```
 
 ### Install from PyPI
 
