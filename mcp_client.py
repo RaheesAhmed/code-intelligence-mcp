@@ -9,7 +9,7 @@ async def main():
                 "args": [
                     "run",
                     "python",
-                    "code_intelligence.py",
+                    "main.py",
                     "--root",
                     "D:\\year_2026\\GovBD-BackEnd-Python\\AIService",
                 ],
